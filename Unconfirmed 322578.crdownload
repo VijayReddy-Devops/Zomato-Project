@@ -1,0 +1,1171 @@
+Started by user vijay
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/Docker-Deployment
+[Pipeline] {
+[Pipeline] tool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Tool Install)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Clean WS)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is used...
+[WS-CLEANUP] done
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Code)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/VijayReddy-Devops/Zomato-Project.git
+ > git init /var/lib/jenkins/workspace/Docker-Deployment # timeout=10
+Fetching upstream changes from https://github.com/VijayReddy-Devops/Zomato-Project.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.50.1'
+ > git fetch --tags --force --progress -- https://github.com/VijayReddy-Devops/Zomato-Project.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/VijayReddy-Devops/Zomato-Project.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision a1b5b18772fed076ddce002d69d2459ed96b94c0 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f a1b5b18772fed076ddce002d69d2459ed96b94c0 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git checkout -b master a1b5b18772fed076ddce002d69d2459ed96b94c0 # timeout=10
+Commit message: "Create svc.yml"
+ > git rev-list --no-walk a1b5b18772fed076ddce002d69d2459ed96b94c0 # timeout=10
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Sonarqube Analysis)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withSonarQubeEnv
+Injecting SonarQube environment variables using the configuration: mysonar
+[Pipeline] {
+[Pipeline] sh
++ /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/mysonar/bin/sonar-scanner -Dsonar.projectName=zomato -Dsonar.projectKey=zomato
+07:14:04.893 INFO  Scanner configuration file: /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/mysonar/conf/sonar-scanner.properties
+07:14:04.897 INFO  Project root configuration file: NONE
+07:14:04.917 INFO  SonarScanner CLI 8.0.1.6346
+07:14:04.919 INFO  Linux 6.18.8-9.213.amzn2023.x86_64 amd64
+07:14:06.387 INFO  Communicating with SonarQube Server 9.9.8.100196
+07:14:06.910 INFO  Load global settings
+07:14:06.988 INFO  Load global settings (done) | time=78ms
+07:14:06.990 INFO  Server id: 147B411E-AZzL4z-eDYJd1loHDJZC
+07:14:06.994 INFO  User cache: /var/lib/jenkins/.sonar/cache
+07:14:06.997 INFO  Load/download plugins
+07:14:06.998 INFO  Load plugins index
+07:14:07.039 INFO  Load plugins index (done) | time=41ms
+07:14:07.109 INFO  Load/download plugins (done) | time=112ms
+07:14:07.600 INFO  Process project properties
+07:14:07.601 INFO  Process project properties (done) | time=1ms
+07:14:07.603 INFO  Execute project builders
+07:14:07.604 INFO  Execute project builders (done) | time=1ms
+07:14:07.607 INFO  Project key: zomato
+07:14:07.607 INFO  Base dir: /var/lib/jenkins/workspace/Docker-Deployment
+07:14:07.607 INFO  Working dir: /var/lib/jenkins/workspace/Docker-Deployment/.scannerwork
+07:14:07.615 INFO  Load project settings for component key: 'zomato'
+07:14:07.631 INFO  Load project settings for component key: 'zomato' (done) | time=16ms
+07:14:07.738 INFO  Auto-configuring with CI 'Jenkins'
+07:14:07.742 INFO  Load quality profiles
+07:14:07.796 INFO  Load quality profiles (done) | time=53ms
+07:14:07.801 INFO  Load active rules
+07:14:09.459 INFO  Load active rules (done) | time=1658ms
+07:14:09.465 INFO  Load analysis cache
+07:14:09.481 INFO  Load analysis cache | time=16ms
+07:14:09.542 INFO  Load project repositories
+07:14:09.557 INFO  Load project repositories (done) | time=15ms
+07:14:09.591 INFO  Indexing files...
+07:14:09.593 INFO  Project configuration:
+07:14:09.783 INFO  46 files indexed
+07:14:09.783 INFO  0 files ignored because of scm ignore settings
+07:14:09.784 INFO  Quality profile for css: Sonar way
+07:14:09.784 INFO  Quality profile for js: Sonar way
+07:14:09.784 INFO  Quality profile for json: Sonar way
+07:14:09.784 INFO  Quality profile for web: Sonar way
+07:14:09.785 INFO  Quality profile for yaml: Sonar way
+07:14:09.785 INFO  ------------- Run sensors on module zomato
+07:14:09.885 INFO  Load metrics repository
+07:14:09.932 INFO  Load metrics repository (done) | time=48ms
+07:14:11.340 INFO  Sensor JaCoCo XML Report Importer [jacoco]
+07:14:11.341 INFO  'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+07:14:11.342 INFO  No report imported, no coverage information will be imported by JaCoCo XML Report Importer
+07:14:11.342 INFO  Sensor JaCoCo XML Report Importer [jacoco] (done) | time=3ms
+07:14:11.342 INFO  Sensor IaC CloudFormation Sensor [iac]
+07:14:11.588 INFO  0 source files to be analyzed
+07:14:11.655 INFO  0/0 source files have been analyzed
+07:14:11.656 INFO  Sensor IaC CloudFormation Sensor [iac] (done) | time=313ms
+07:14:11.656 INFO  Sensor IaC Kubernetes Sensor [iac]
+07:14:11.720 INFO  2 source files to be analyzed
+07:14:11.845 INFO  2/2 source files have been analyzed
+07:14:11.845 INFO  Sensor IaC Kubernetes Sensor [iac] (done) | time=189ms
+07:14:11.846 INFO  Sensor JavaScript analysis [javascript]
+07:14:16.062 INFO  11 source files to be analyzed
+07:14:17.581 INFO  11/11 source files have been analyzed
+07:14:17.582 INFO  Hit the cache for 0 out of 11
+07:14:17.583 INFO  Miss the cache for 11 out of 11: ANALYSIS_MODE_INELIGIBLE [11/11]
+07:14:17.584 INFO  Sensor JavaScript analysis [javascript] (done) | time=5737ms
+07:14:17.584 INFO  Sensor TypeScript analysis [javascript]
+07:14:17.584 INFO  No input files found for analysis
+07:14:17.584 INFO  Hit the cache for 0 out of 0
+07:14:17.585 INFO  Miss the cache for 0 out of 0
+07:14:17.585 INFO  Sensor TypeScript analysis [javascript] (done) | time=1ms
+07:14:17.585 INFO  Sensor JavaScript inside YAML analysis [javascript]
+07:14:17.586 INFO  No input files found for analysis
+07:14:17.586 INFO  Hit the cache for 0 out of 0
+07:14:17.586 INFO  Miss the cache for 0 out of 0
+07:14:17.586 INFO  Sensor JavaScript inside YAML analysis [javascript] (done) | time=1ms
+07:14:17.586 INFO  Sensor CSS Rules [javascript]
+07:14:17.592 INFO  10 source files to be analyzed
+07:14:17.896 INFO  10/10 source files have been analyzed
+07:14:17.897 INFO  Hit the cache for 0 out of 0
+07:14:17.897 INFO  Miss the cache for 0 out of 0
+07:14:17.897 INFO  Sensor CSS Rules [javascript] (done) | time=311ms
+07:14:17.897 INFO  Sensor CSS Metrics [javascript]
+07:14:17.950 INFO  Sensor CSS Metrics [javascript] (done) | time=53ms
+07:14:17.951 INFO  Sensor C# Project Type Information [csharp]
+07:14:17.952 INFO  Sensor C# Project Type Information [csharp] (done) | time=0ms
+07:14:17.952 INFO  Sensor C# Analysis Log [csharp]
+07:14:17.963 INFO  Sensor C# Analysis Log [csharp] (done) | time=11ms
+07:14:17.963 INFO  Sensor C# Properties [csharp]
+07:14:17.963 INFO  Sensor C# Properties [csharp] (done) | time=0ms
+07:14:17.963 INFO  Sensor HTML [web]
+07:14:17.993 INFO  Sensor HTML [web] (done) | time=30ms
+07:14:17.993 INFO  Sensor TextAndSecretsSensor [text]
+07:14:18.001 INFO  26 source files to be analyzed
+07:14:18.445 INFO  26/26 source files have been analyzed
+07:14:18.446 INFO  Sensor TextAndSecretsSensor [text] (done) | time=453ms
+07:14:18.446 INFO  Sensor VB.NET Project Type Information [vbnet]
+07:14:18.447 INFO  Sensor VB.NET Project Type Information [vbnet] (done) | time=1ms
+07:14:18.447 INFO  Sensor VB.NET Analysis Log [vbnet]
+07:14:18.458 INFO  Sensor VB.NET Analysis Log [vbnet] (done) | time=11ms
+07:14:18.458 INFO  Sensor VB.NET Properties [vbnet]
+07:14:18.458 INFO  Sensor VB.NET Properties [vbnet] (done) | time=0ms
+07:14:18.458 INFO  Sensor IaC Docker Sensor [iac]
+07:14:18.460 INFO  1 source file to be analyzed
+07:14:18.531 INFO  1/1 source file has been analyzed
+07:14:18.531 INFO  Sensor IaC Docker Sensor [iac] (done) | time=73ms
+07:14:18.535 INFO  ------------- Run sensors on project
+07:14:18.589 INFO  Sensor Analysis Warnings import [csharp]
+07:14:18.590 INFO  Sensor Analysis Warnings import [csharp] (done) | time=1ms
+07:14:18.590 INFO  Sensor Zero Coverage Sensor
+07:14:18.598 INFO  Sensor Zero Coverage Sensor (done) | time=8ms
+07:14:18.609 INFO  CPD Executor 1 file had no CPD blocks
+07:14:18.609 INFO  CPD Executor Calculating CPD for 11 files
+07:14:18.624 INFO  CPD Executor CPD calculation finished (done) | time=13ms
+07:14:18.698 INFO  Analysis report generated in 70ms, dir size=195.9 kB
+07:14:18.741 INFO  Analysis report compressed in 41ms, zip size=72.7 kB
+07:14:18.834 INFO  Analysis report uploaded in 93ms
+07:14:18.835 INFO  ANALYSIS SUCCESSFUL, you can find the results at: http://54.161.5.68:9000/dashboard?id=zomato
+07:14:18.835 INFO  Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+07:14:18.835 INFO  More about the report processing at http://54.161.5.68:9000/api/ce/task?id=AZzMTAAaDYJd1loHDTSn
+07:14:24.356 INFO  Analysis total time: 17.149 s
+07:14:24.358 INFO  EXECUTION SUCCESS
+07:14:24.358 INFO  Total time: 19.511s
+[Pipeline] }
+[Pipeline] // withSonarQubeEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Quality Gates)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] waitForQualityGate
+Checking status of SonarQube task 'AZzMTAAaDYJd1loHDTSn' on server 'mysonar'
+SonarQube task 'AZzMTAAaDYJd1loHDTSn' status is 'SUCCESS'
+SonarQube task 'AZzMTAAaDYJd1loHDTSn' completed. Quality gate is 'OK'
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (node)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ npm install
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: '@jest/expect-utils@29.3.1',
+npm WARN EBADENGINE   required: { node: '^14.15.0 || ^16.10.0 || >=18.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'jest-get-type@29.2.0',
+npm WARN EBADENGINE   required: { node: '^14.15.0 || ^16.10.0 || >=18.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: '@jest/schemas@28.1.3',
+npm WARN EBADENGINE   required: { node: '^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: '@jest/schemas@29.0.0',
+npm WARN EBADENGINE   required: { node: '^14.15.0 || ^16.10.0 || >=18.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: '@jest/types@29.3.1',
+npm WARN EBADENGINE   required: { node: '^14.15.0 || ^16.10.0 || >=18.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'diff-sequences@29.3.1',
+npm WARN EBADENGINE   required: { node: '^14.15.0 || ^16.10.0 || >=18.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'expect@29.3.1',
+npm WARN EBADENGINE   required: { node: '^14.15.0 || ^16.10.0 || >=18.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'jest-diff@29.3.1',
+npm WARN EBADENGINE   required: { node: '^14.15.0 || ^16.10.0 || >=18.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'jest-get-type@29.2.0',
+npm WARN EBADENGINE   required: { node: '^14.15.0 || ^16.10.0 || >=18.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'jest-matcher-utils@29.3.1',
+npm WARN EBADENGINE   required: { node: '^14.15.0 || ^16.10.0 || >=18.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'jest-message-util@29.3.1',
+npm WARN EBADENGINE   required: { node: '^14.15.0 || ^16.10.0 || >=18.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'jest-util@29.3.1',
+npm WARN EBADENGINE   required: { node: '^14.15.0 || ^16.10.0 || >=18.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'pretty-format@29.3.1',
+npm WARN EBADENGINE   required: { node: '^14.15.0 || ^16.10.0 || >=18.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'jest-worker@28.1.3',
+npm WARN EBADENGINE   required: { node: '^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: '@jest/console@28.1.3',
+npm WARN EBADENGINE   required: { node: '^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: '@jest/test-result@28.1.3',
+npm WARN EBADENGINE   required: { node: '^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: '@jest/types@28.1.3',
+npm WARN EBADENGINE   required: { node: '^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'jest-message-util@28.1.3',
+npm WARN EBADENGINE   required: { node: '^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'jest-regex-util@28.0.2',
+npm WARN EBADENGINE   required: { node: '^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'jest-util@28.1.3',
+npm WARN EBADENGINE   required: { node: '^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'jest-watcher@28.1.3',
+npm WARN EBADENGINE   required: { node: '^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'pretty-format@28.1.3',
+npm WARN EBADENGINE   required: { node: '^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0' },
+npm WARN EBADENGINE   current: { node: 'v16.2.0', npm: '7.13.0' }
+npm WARN EBADENGINE }
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm WARN deprecated rollup-plugin-terser@7.0.2: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-terser
+npm WARN deprecated w3c-hr-time@1.0.2: Use your platform's native performance.now() and performance.timeOrigin.
+npm WARN deprecated sourcemap-codec@1.4.8: Please use @jridgewell/sourcemap-codec instead
+npm WARN deprecated svgo@1.3.2: This SVGO version is no longer supported. Upgrade to v2.x.x.
+
+added 1506 packages, and audited 1507 packages in 20s
+
+235 packages are looking for funding
+  run `npm fund` for details
+
+60 vulnerabilities (15 low, 18 moderate, 24 high, 3 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (OWASP)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] dependencyCheck
+[INFO] Checking for updates
+[INFO] Skipping the NVD API Update as it was completed within the last 240 minutes
+[INFO] Skipping Known Exploited Vulnerabilities update check since last check was within 24 hours.
+[INFO] Check for updates complete (146 ms)
+[INFO] 
+
+Dependency-Check is an open source tool performing a best effort analysis of 3rd party dependencies; false positives and false negatives may exist in the analysis performed by the tool. Use of the tool and the reporting provided constitutes acceptance for use in an AS IS condition, and there are NO warranties, implied or otherwise, with regard to the analysis or its use. Any use of the tool and the reporting provided is at the user's risk. In no event shall the copyright holder or OWASP be held liable for any damages whatsoever arising out of or in connection with the use of this tool, the analysis performed, or the resulting report.
+
+
+   About ODC: https://dependency-check.github.io/DependencyCheck/general/internals.html
+   False Positives: https://dependency-check.github.io/DependencyCheck/general/suppression.html
+
+
+[INFO] Analysis Started
+[INFO] Finished File Name Analyzer (0 seconds)
+[WARN] dependency skipped: node module fsevents seems optional and not installed
+[INFO] Finished Node.js Package Analyzer (11 seconds)
+[INFO] Finished Dependency Merging Analyzer (12 seconds)
+[INFO] Finished Hint Analyzer (0 seconds)
+[INFO] Finished Version Filter Analyzer (0 seconds)
+[INFO] Created CPE Index (2 seconds)
+[INFO] Finished CPE Analyzer (7 seconds)
+[INFO] Finished False Positive Analyzer (0 seconds)
+[INFO] Finished NVD CVE Analyzer (0 seconds)
+[INFO] Finished RetireJS Analyzer (122 seconds)
+[WARN] Disabling OSS Index analyzer due to missing user/password credentials. Authentication is now required: https://ossindex.sonatype.org/doc/auth-required
+[INFO] Finished Vulnerability Suppression Analyzer (0 seconds)
+[INFO] Finished Known Exploited Vulnerability Analyzer (0 seconds)
+[INFO] Finished Dependency Bundling Analyzer (214 seconds)
+[INFO] Finished Unused Suppression Rule Analyzer (0 seconds)
+[INFO] Analysis Complete (369 seconds)
+[INFO] Writing XML report to: /var/lib/jenkins/workspace/Docker-Deployment/./dependency-check-report.xml
+[Pipeline] dependencyCheckPublisher
+Collecting Dependency-Check artifact
+Parsing file /var/lib/jenkins/workspace/Docker-Deployment/dependency-check-report.xml
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Trivy scan)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ trivy fs .
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Dockerfile)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker build -t vijayreddykona/zomato:latest .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 380B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:16-slim
+#2 DONE 0.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [builder 1/6] FROM docker.io/library/node:16-slim@sha256:3ebf2875c188d22939c6ab080cfb1a4a6248cc86bae600ea8e2326aa03acdb8f
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 48.66MB 3.7s done
+#5 DONE 3.8s
+
+#6 [builder 2/6] WORKDIR /app
+#6 CACHED
+
+#7 [builder 3/6] COPY package*.json ./
+#7 CACHED
+
+#8 [builder 4/6] RUN npm install
+#8 CACHED
+
+#9 [builder 5/6] COPY . .
+#9 DONE 26.1s
+
+#10 [builder 6/6] RUN npm run build
+#10 0.953 
+#10 0.953 > zomato_clone@0.1.0 build
+#10 0.953 > react-scripts build
+#10 0.953 
+#10 2.754 Creating an optimized production build...
+#10 2.903 Browserslist: caniuse-lite is outdated. Please run:
+#10 2.903   npx update-browserslist-db@latest
+#10 2.903   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+#10 17.82 Browserslist: caniuse-lite is outdated. Please run:
+#10 17.82   npx update-browserslist-db@latest
+#10 17.82   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+#10 18.62 Compiled successfully.
+#10 18.62 
+#10 18.62 File sizes after gzip:
+#10 18.62 
+#10 18.63   70.92 kB  build/static/js/main.2714c32e.js
+#10 18.63   2.07 kB   build/static/css/main.4b9cd1da.css
+#10 18.63 
+#10 18.64 The project was built assuming it is hosted at /.
+#10 18.64 You can control this with the homepage field in your package.json.
+#10 18.64 
+#10 18.64 The build folder is ready to be deployed.
+#10 18.64 You may serve it with a static server:
+#10 18.64 
+#10 18.64   npm install -g serve
+#10 18.64   serve -s build
+#10 18.64 
+#10 18.64 Find out more about deployment here:
+#10 18.64 
+#10 18.64   https://cra.link/deployment
+#10 18.64 
+#10 DONE 18.8s
+
+#11 [final 1/4] WORKDIR /app
+#11 DONE 0.1s
+
+#12 [final 2/4] COPY --from=builder /app/build ./build
+#12 DONE 0.0s
+
+#13 [final 3/4] COPY package*.json ./
+#13 DONE 0.4s
+
+#14 [final 4/4] RUN npm install --production
+#14 0.607 npm WARN config production Use `--omit=dev` instead.
+#14 7.945 
+#14 7.945 up to date, audited 1507 packages in 7s
+#14 7.945 
+#14 7.945 235 packages are looking for funding
+#14 7.945   run `npm fund` for details
+#14 8.045 
+#14 8.045 60 vulnerabilities (15 low, 18 moderate, 24 high, 3 critical)
+#14 8.045 
+#14 8.045 To address issues that do not require attention, run:
+#14 8.045   npm audit fix
+#14 8.045 
+#14 8.045 To address all issues (including breaking changes), run:
+#14 8.045   npm audit fix --force
+#14 8.045 
+#14 8.045 Run `npm audit` for details.
+#14 DONE 8.1s
+
+#15 exporting to image
+#15 exporting layers
+#15 exporting layers 7.3s done
+#15 writing image sha256:84c5898c64f425a7b2699f567d6f2e110f79829df54d6436b2b67cc013d01caa done
+#15 naming to docker.io/vijayreddykona/zomato:latest done
+#15 DONE 7.3s
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Docker Build & Push)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withDockerRegistry
+$ docker login -u vijayreddykona -p ******** https://index.docker.io/v1/
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /var/lib/jenkins/workspace/Docker-Deployment@tmp/fa00f656-dd83-46cb-bf29-0c367e53622c/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+[Pipeline] {
+[Pipeline] sh
++ docker push vijayreddykona/zomato:latest
+The push refers to repository [docker.io/vijayreddykona/zomato]
+2b2b2249cc69: Preparing
+7cd67a6d42a0: Preparing
+1d5c79acccfb: Preparing
+5f70bf18a086: Preparing
+b916a857ffa0: Preparing
+3df77d534a72: Preparing
+a215d7de9c14: Preparing
+4e2cb7f1f48d: Preparing
+c25ace39a90c: Preparing
+1e3fa18d31de: Preparing
+5db157ea12db: Preparing
+de7107ec4353: Preparing
+94584abc8682: Preparing
+7181ae4642b7: Preparing
+4e2cb7f1f48d: Waiting
+c25ace39a90c: Waiting
+1e3fa18d31de: Waiting
+5db157ea12db: Waiting
+de7107ec4353: Waiting
+3df77d534a72: Waiting
+a215d7de9c14: Waiting
+7181ae4642b7: Waiting
+5f70bf18a086: Layer already exists
+7cd67a6d42a0: Pushed
+a215d7de9c14: Layer already exists
+4e2cb7f1f48d: Layer already exists
+c25ace39a90c: Layer already exists
+1e3fa18d31de: Layer already exists
+5db157ea12db: Layer already exists
+de7107ec4353: Layer already exists
+94584abc8682: Layer already exists
+7181ae4642b7: Layer already exists
+2b2b2249cc69: Pushed
+1d5c79acccfb: Pushed
+b916a857ffa0: Pushed
+3df77d534a72: Pushed
+latest: digest: sha256:5165fcd188b68b1c5cf41fe4da5e6059986765c70d672de429ac2967b5266a4a size: 3256
+[Pipeline] }
+[Pipeline] // withDockerRegistry
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Scan image)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ trivy image vijayreddykona/zomato:latest
+2026-03-08T07:23:32.024Z	[34mINFO[0m	Detected OS: debian
+2026-03-08T07:23:32.024Z	[34mINFO[0m	Detecting Debian vulnerabilities...
+2026-03-08T07:23:32.031Z	[34mINFO[0m	Number of PL dependency files: 1
+2026-03-08T07:23:32.031Z	[34mINFO[0m	Detecting npm vulnerabilities...
+2026-03-08T07:23:32.041Z	[33mWARN[0m	This OS version is no longer supported by the distribution: debian 10.13
+2026-03-08T07:23:32.041Z	[33mWARN[0m	The vulnerability detection may be insufficient because security updates are not provided
+
+vijayreddykona/zomato:latest (debian 10.13)
+===========================================
+Total: 106 (UNKNOWN: 2, LOW: 10, MEDIUM: 46, HIGH: 44, CRITICAL: 4)
+
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+|    LIBRARY    | VULNERABILITY ID | SEVERITY |   INSTALLED VERSION    | FIXED VERSION |                  TITLE                  |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| apt           | CVE-2011-3374    | LOW      | 1.8.2.3                |               | It was found that apt-key in apt,       |
+|               |                  |          |                        |               | all versions, do not correctly...       |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2011-3374    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| bash          | CVE-2019-18276   | HIGH     | 5.0-4                  |               | bash: when effective UID is not         |
+|               |                  |          |                        |               | equal to its real UID the...            |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-18276   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2022-3715    |          |                        |               | bash: a heap-buffer-overflow            |
+|               |                  |          |                        |               | in valid_parameter_transform            |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-3715    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| bsdutils      | CVE-2021-37600   | MEDIUM   | 2.33.1-0.1             |               | util-linux: integer overflow            |
+|               |                  |          |                        |               | can lead to buffer overflow             |
+|               |                  |          |                        |               | in get_sem_elements() in                |
+|               |                  |          |                        |               | sys-utils/ipcutils.c...                 |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-37600   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2022-0563    |          |                        |               | util-linux: partial disclosure          |
+|               |                  |          |                        |               | of arbitrary files in chfn              |
+|               |                  |          |                        |               | and chsh when compiled...               |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-0563    |
++---------------+------------------+          +------------------------+---------------+-----------------------------------------+
+| coreutils     | CVE-2016-2781    |          | 8.30-3                 |               | coreutils: Non-privileged               |
+|               |                  |          |                        |               | session can escape to the               |
+|               |                  |          |                        |               | parent session in chroot                |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2016-2781    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2017-18018   |          |                        |               | coreutils: race condition               |
+|               |                  |          |                        |               | vulnerability in chown and chgrp        |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2017-18018   |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| e2fsprogs     | CVE-2022-1304    | HIGH     | 1.44.5-1+deb10u3       |               | e2fsprogs: out-of-bounds                |
+|               |                  |          |                        |               | read/write via crafted filesystem       |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-1304    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| fdisk         | CVE-2021-37600   | MEDIUM   | 2.33.1-0.1             |               | util-linux: integer overflow            |
+|               |                  |          |                        |               | can lead to buffer overflow             |
+|               |                  |          |                        |               | in get_sem_elements() in                |
+|               |                  |          |                        |               | sys-utils/ipcutils.c...                 |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-37600   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2022-0563    |          |                        |               | util-linux: partial disclosure          |
+|               |                  |          |                        |               | of arbitrary files in chfn              |
+|               |                  |          |                        |               | and chsh when compiled...               |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-0563    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| gcc-8-base    | CVE-2018-12886   | HIGH     | 8.3.0-6                |               | gcc: spilling of stack                  |
+|               |                  |          |                        |               | protection address in cfgexpand.c       |
+|               |                  |          |                        |               | and function.c leads to...              |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2018-12886   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-15847   |          |                        |               | gcc: POWER9 "DARN" RNG intrinsic        |
+|               |                  |          |                        |               | produces repeated output                |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-15847   |
++---------------+------------------+          +------------------------+---------------+-----------------------------------------+
+| gpgv          | CVE-2019-14855   |          | 2.2.12-1+deb10u2       |               | gnupg2: OpenPGP Key Certification       |
+|               |                  |          |                        |               | Forgeries with SHA-1                    |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-14855   |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libapt-pkg5.0 | CVE-2011-3374    | LOW      | 1.8.2.3                |               | It was found that apt-key in apt,       |
+|               |                  |          |                        |               | all versions, do not correctly...       |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2011-3374    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libblkid1     | CVE-2021-37600   | MEDIUM   | 2.33.1-0.1             |               | util-linux: integer overflow            |
+|               |                  |          |                        |               | can lead to buffer overflow             |
+|               |                  |          |                        |               | in get_sem_elements() in                |
+|               |                  |          |                        |               | sys-utils/ipcutils.c...                 |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-37600   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2022-0563    |          |                        |               | util-linux: partial disclosure          |
+|               |                  |          |                        |               | of arbitrary files in chfn              |
+|               |                  |          |                        |               | and chsh when compiled...               |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-0563    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libc-bin      | CVE-2019-1010022 | CRITICAL | 2.28-10+deb10u2        |               | glibc: stack guard protection bypass    |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-1010022 |
++               +------------------+----------+                        +---------------+-----------------------------------------+
+|               | CVE-2018-20796   | HIGH     |                        |               | glibc: uncontrolled recursion in        |
+|               |                  |          |                        |               | function check_dst_limits_calc_pos_1    |
+|               |                  |          |                        |               | in posix/regexec.c                      |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2018-20796   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-1010023 |          |                        |               | glibc: running ldd on malicious ELF     |
+|               |                  |          |                        |               | leads to code execution because of...   |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-1010023 |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-9192    |          |                        |               | glibc: uncontrolled recursion in        |
+|               |                  |          |                        |               | function check_dst_limits_calc_pos_1    |
+|               |                  |          |                        |               | in posix/regexec.c                      |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-9192    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2020-1751    |          |                        |               | glibc: array overflow in                |
+|               |                  |          |                        |               | backtrace functions for powerpc         |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2020-1751    |
++               +------------------+----------+                        +---------------+-----------------------------------------+
+|               | CVE-2010-4756    | MEDIUM   |                        |               | glibc: glob implementation              |
+|               |                  |          |                        |               | can cause excessive CPU and             |
+|               |                  |          |                        |               | memory consumption due to...            |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2010-4756    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-1010024 |          |                        |               | glibc: ASLR bypass using                |
+|               |                  |          |                        |               | cache of thread stack and heap          |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-1010024 |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-1010025 |          |                        |               | glibc: information disclosure of heap   |
+|               |                  |          |                        |               | addresses of pthread_created thread     |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-1010025 |
++---------------+------------------+----------+                        +---------------+-----------------------------------------+
+| libc6         | CVE-2019-1010022 | CRITICAL |                        |               | glibc: stack guard protection bypass    |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-1010022 |
++               +------------------+----------+                        +---------------+-----------------------------------------+
+|               | CVE-2018-20796   | HIGH     |                        |               | glibc: uncontrolled recursion in        |
+|               |                  |          |                        |               | function check_dst_limits_calc_pos_1    |
+|               |                  |          |                        |               | in posix/regexec.c                      |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2018-20796   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-1010023 |          |                        |               | glibc: running ldd on malicious ELF     |
+|               |                  |          |                        |               | leads to code execution because of...   |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-1010023 |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-9192    |          |                        |               | glibc: uncontrolled recursion in        |
+|               |                  |          |                        |               | function check_dst_limits_calc_pos_1    |
+|               |                  |          |                        |               | in posix/regexec.c                      |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-9192    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2020-1751    |          |                        |               | glibc: array overflow in                |
+|               |                  |          |                        |               | backtrace functions for powerpc         |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2020-1751    |
++               +------------------+----------+                        +---------------+-----------------------------------------+
+|               | CVE-2010-4756    | MEDIUM   |                        |               | glibc: glob implementation              |
+|               |                  |          |                        |               | can cause excessive CPU and             |
+|               |                  |          |                        |               | memory consumption due to...            |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2010-4756    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-1010024 |          |                        |               | glibc: ASLR bypass using                |
+|               |                  |          |                        |               | cache of thread stack and heap          |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-1010024 |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-1010025 |          |                        |               | glibc: information disclosure of heap   |
+|               |                  |          |                        |               | addresses of pthread_created thread     |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-1010025 |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libcom-err2   | CVE-2022-1304    | HIGH     | 1.44.5-1+deb10u3       |               | e2fsprogs: out-of-bounds                |
+|               |                  |          |                        |               | read/write via crafted filesystem       |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-1304    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libdb5.3      | CVE-2019-8457    | CRITICAL | 5.3.28+dfsg1-0.5       |               | sqlite: heap out-of-bound               |
+|               |                  |          |                        |               | read in function rtreenode()            |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-8457    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libext2fs2    | CVE-2022-1304    | HIGH     | 1.44.5-1+deb10u3       |               | e2fsprogs: out-of-bounds                |
+|               |                  |          |                        |               | read/write via crafted filesystem       |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-1304    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libfdisk1     | CVE-2021-37600   | MEDIUM   | 2.33.1-0.1             |               | util-linux: integer overflow            |
+|               |                  |          |                        |               | can lead to buffer overflow             |
+|               |                  |          |                        |               | in get_sem_elements() in                |
+|               |                  |          |                        |               | sys-utils/ipcutils.c...                 |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-37600   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2022-0563    |          |                        |               | util-linux: partial disclosure          |
+|               |                  |          |                        |               | of arbitrary files in chfn              |
+|               |                  |          |                        |               | and chsh when compiled...               |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-0563    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libgcc1       | CVE-2018-12886   | HIGH     | 8.3.0-6                |               | gcc: spilling of stack                  |
+|               |                  |          |                        |               | protection address in cfgexpand.c       |
+|               |                  |          |                        |               | and function.c leads to...              |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2018-12886   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-15847   |          |                        |               | gcc: POWER9 "DARN" RNG intrinsic        |
+|               |                  |          |                        |               | produces repeated output                |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-15847   |
++---------------+------------------+          +------------------------+---------------+-----------------------------------------+
+| libgcrypt20   | CVE-2018-6829    |          | 1.8.4-5+deb10u1        |               | libgcrypt: ElGamal implementation       |
+|               |                  |          |                        |               | doesn't have semantic security due      |
+|               |                  |          |                        |               | to incorrectly encoded plaintexts...    |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2018-6829    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2021-33560   |          |                        |               | libgcrypt: mishandles ElGamal           |
+|               |                  |          |                        |               | encryption because it lacks             |
+|               |                  |          |                        |               | exponent blinding to address a...       |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-33560   |
++               +------------------+----------+                        +---------------+-----------------------------------------+
+|               | CVE-2019-13627   | MEDIUM   |                        |               | libgcrypt: ECDSA timing attack          |
+|               |                  |          |                        |               | allowing private key leak               |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-13627   |
++---------------+------------------+          +------------------------+---------------+-----------------------------------------+
+| libgnutls30   | CVE-2011-3389    |          | 3.6.7-4+deb10u10       |               | HTTPS: block-wise chosen-plaintext      |
+|               |                  |          |                        |               | attack against SSL/TLS (BEAST)          |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2011-3389    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libidn2-0     | CVE-2019-12290   | HIGH     | 2.0.5-1+deb10u1        |               | GNU libidn2 before 2.2.0                |
+|               |                  |          |                        |               | fails to perform the roundtrip          |
+|               |                  |          |                        |               | checks specified in...                  |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-12290   |
++---------------+------------------+          +------------------------+---------------+-----------------------------------------+
+| liblz4-1      | CVE-2019-17543   |          | 1.8.3-1+deb10u1        |               | lz4: heap-based buffer                  |
+|               |                  |          |                        |               | overflow in LZ4_write32                 |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-17543   |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libmount1     | CVE-2021-37600   | MEDIUM   | 2.33.1-0.1             |               | util-linux: integer overflow            |
+|               |                  |          |                        |               | can lead to buffer overflow             |
+|               |                  |          |                        |               | in get_sem_elements() in                |
+|               |                  |          |                        |               | sys-utils/ipcutils.c...                 |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-37600   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2022-0563    |          |                        |               | util-linux: partial disclosure          |
+|               |                  |          |                        |               | of arbitrary files in chfn              |
+|               |                  |          |                        |               | and chsh when compiled...               |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-0563    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libncursesw6  | CVE-2021-39537   | HIGH     | 6.1+20181013-2+deb10u3 |               | ncurses: heap-based buffer overflow     |
+|               |                  |          |                        |               | in _nc_captoinfo() in captoinfo.c       |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-39537   |
++---------------+------------------+          +------------------------+---------------+-----------------------------------------+
+| libpcre3      | CVE-2017-11164   |          | 2:8.39-12              |               | pcre: OP_KETRMAX feature in the         |
+|               |                  |          |                        |               | match function in pcre_exec.c           |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2017-11164   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2017-7245    |          |                        |               | pcre: stack-based buffer overflow       |
+|               |                  |          |                        |               | write in pcre32_copy_substring          |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2017-7245    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2017-7246    |          |                        |               | pcre: stack-based buffer overflow       |
+|               |                  |          |                        |               | write in pcre32_copy_substring          |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2017-7246    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-20838   |          |                        |               | pcre: Buffer over-read in JIT           |
+|               |                  |          |                        |               | when UTF is disabled and \X or...       |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-20838   |
++               +------------------+----------+                        +---------------+-----------------------------------------+
+|               | CVE-2017-16231   | MEDIUM   |                        |               | pcre: self-recursive call               |
+|               |                  |          |                        |               | in match() in pcre_exec.c               |
+|               |                  |          |                        |               | leads to denial of service...           |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2017-16231   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2020-14155   |          |                        |               | pcre: Integer overflow when             |
+|               |                  |          |                        |               | parsing callout numeric arguments       |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2020-14155   |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libseccomp2   | CVE-2019-9893    | CRITICAL | 2.3.3-4                |               | libseccomp: incorrect generation        |
+|               |                  |          |                        |               | of syscall filters in libseccomp        |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-9893    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libsepol1     | CVE-2021-36084   | LOW      | 2.8-1                  |               | libsepol: use-after-free in             |
+|               |                  |          |                        |               | __cil_verify_classperms()               |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-36084   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2021-36085   |          |                        |               | libsepol: use-after-free in             |
+|               |                  |          |                        |               | __cil_verify_classperms()               |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-36085   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2021-36086   |          |                        |               | libsepol: use-after-free in             |
+|               |                  |          |                        |               | cil_reset_classpermission()             |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-36086   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2021-36087   |          |                        |               | libsepol: heap-based buffer             |
+|               |                  |          |                        |               | overflow in ebitmap_match_any()         |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-36087   |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libsmartcols1 | CVE-2021-37600   | MEDIUM   | 2.33.1-0.1             |               | util-linux: integer overflow            |
+|               |                  |          |                        |               | can lead to buffer overflow             |
+|               |                  |          |                        |               | in get_sem_elements() in                |
+|               |                  |          |                        |               | sys-utils/ipcutils.c...                 |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-37600   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2022-0563    |          |                        |               | util-linux: partial disclosure          |
+|               |                  |          |                        |               | of arbitrary files in chfn              |
+|               |                  |          |                        |               | and chsh when compiled...               |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-0563    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libss2        | CVE-2022-1304    | HIGH     | 1.44.5-1+deb10u3       |               | e2fsprogs: out-of-bounds                |
+|               |                  |          |                        |               | read/write via crafted filesystem       |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-1304    |
++---------------+------------------+          +------------------------+---------------+-----------------------------------------+
+| libstdc++6    | CVE-2018-12886   |          | 8.3.0-6                |               | gcc: spilling of stack                  |
+|               |                  |          |                        |               | protection address in cfgexpand.c       |
+|               |                  |          |                        |               | and function.c leads to...              |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2018-12886   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-15847   |          |                        |               | gcc: POWER9 "DARN" RNG intrinsic        |
+|               |                  |          |                        |               | produces repeated output                |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-15847   |
++---------------+------------------+          +------------------------+---------------+-----------------------------------------+
+| libsystemd0   | CVE-2019-3843    |          | 241-7~deb10u10         |               | systemd: services with DynamicUser      |
+|               |                  |          |                        |               | can create SUID/SGID binaries           |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-3843    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-3844    |          |                        |               | systemd: services with DynamicUser      |
+|               |                  |          |                        |               | can get new privileges and              |
+|               |                  |          |                        |               | create SGID binaries...                 |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-3844    |
++               +------------------+----------+                        +---------------+-----------------------------------------+
+|               | CVE-2020-13529   | MEDIUM   |                        |               | systemd: DHCP FORCERENEW                |
+|               |                  |          |                        |               | authentication not implemented          |
+|               |                  |          |                        |               | can cause a system running the...       |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2020-13529   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2021-3997    |          |                        |               | systemd: Uncontrolled recursion in      |
+|               |                  |          |                        |               | systemd-tmpfiles when removing files    |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-3997    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2022-3821    |          |                        |               | systemd: buffer overrun in              |
+|               |                  |          |                        |               | format_timespan() function              |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-3821    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2022-4415    |          |                        |               | systemd: local information leak due     |
+|               |                  |          |                        |               | to systemd-coredump not respecting      |
+|               |                  |          |                        |               | fs.suid_dumpable kernel setting...      |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-4415    |
++               +------------------+----------+                        +---------------+-----------------------------------------+
+|               | CVE-2013-4392    | LOW      |                        |               | systemd: TOCTOU race condition          |
+|               |                  |          |                        |               | when updating file permissions          |
+|               |                  |          |                        |               | and SELinux security contexts...        |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2013-4392    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-20386   |          |                        |               | systemd: memory leak in button_open()   |
+|               |                  |          |                        |               | in login/logind-button.c when           |
+|               |                  |          |                        |               | udev events are received...             |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-20386   |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libtasn1-6    | CVE-2018-1000654 | MEDIUM   | 4.13-3+deb10u1         |               | libtasn1: Infinite loop in              |
+|               |                  |          |                        |               | _asn1_expand_object_id(ptree)           |
+|               |                  |          |                        |               | leads to memory exhaustion              |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2018-1000654 |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libtinfo6     | CVE-2021-39537   | HIGH     | 6.1+20181013-2+deb10u3 |               | ncurses: heap-based buffer overflow     |
+|               |                  |          |                        |               | in _nc_captoinfo() in captoinfo.c       |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-39537   |
++---------------+------------------+          +------------------------+---------------+-----------------------------------------+
+| libudev1      | CVE-2019-3843    |          | 241-7~deb10u10         |               | systemd: services with DynamicUser      |
+|               |                  |          |                        |               | can create SUID/SGID binaries           |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-3843    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-3844    |          |                        |               | systemd: services with DynamicUser      |
+|               |                  |          |                        |               | can get new privileges and              |
+|               |                  |          |                        |               | create SGID binaries...                 |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-3844    |
++               +------------------+----------+                        +---------------+-----------------------------------------+
+|               | CVE-2020-13529   | MEDIUM   |                        |               | systemd: DHCP FORCERENEW                |
+|               |                  |          |                        |               | authentication not implemented          |
+|               |                  |          |                        |               | can cause a system running the...       |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2020-13529   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2021-3997    |          |                        |               | systemd: Uncontrolled recursion in      |
+|               |                  |          |                        |               | systemd-tmpfiles when removing files    |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-3997    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2022-3821    |          |                        |               | systemd: buffer overrun in              |
+|               |                  |          |                        |               | format_timespan() function              |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-3821    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2022-4415    |          |                        |               | systemd: local information leak due     |
+|               |                  |          |                        |               | to systemd-coredump not respecting      |
+|               |                  |          |                        |               | fs.suid_dumpable kernel setting...      |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-4415    |
++               +------------------+----------+                        +---------------+-----------------------------------------+
+|               | CVE-2013-4392    | LOW      |                        |               | systemd: TOCTOU race condition          |
+|               |                  |          |                        |               | when updating file permissions          |
+|               |                  |          |                        |               | and SELinux security contexts...        |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2013-4392    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-20386   |          |                        |               | systemd: memory leak in button_open()   |
+|               |                  |          |                        |               | in login/logind-button.c when           |
+|               |                  |          |                        |               | udev events are received...             |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-20386   |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| libuuid1      | CVE-2021-37600   | MEDIUM   | 2.33.1-0.1             |               | util-linux: integer overflow            |
+|               |                  |          |                        |               | can lead to buffer overflow             |
+|               |                  |          |                        |               | in get_sem_elements() in                |
+|               |                  |          |                        |               | sys-utils/ipcutils.c...                 |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-37600   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2022-0563    |          |                        |               | util-linux: partial disclosure          |
+|               |                  |          |                        |               | of arbitrary files in chfn              |
+|               |                  |          |                        |               | and chsh when compiled...               |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-0563    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| login         | CVE-2019-19882   | HIGH     | 1:4.5-1.1              |               | shadow-utils: local users can           |
+|               |                  |          |                        |               | obtain root access because setuid       |
+|               |                  |          |                        |               | programs are misconfigured...           |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-19882   |
++               +------------------+----------+                        +---------------+-----------------------------------------+
+|               | CVE-2007-5686    | MEDIUM   |                        |               | initscripts in rPath Linux 1            |
+|               |                  |          |                        |               | sets insecure permissions for           |
+|               |                  |          |                        |               | the /var/log/btmp file,...              |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2007-5686    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2013-4235    |          |                        |               | shadow-utils: TOCTOU race               |
+|               |                  |          |                        |               | conditions by copying and               |
+|               |                  |          |                        |               | removing directory trees                |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2013-4235    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2018-7169    |          |                        |               | shadow-utils: newgidmap                 |
+|               |                  |          |                        |               | allows unprivileged user to             |
+|               |                  |          |                        |               | drop supplementary groups               |
+|               |                  |          |                        |               | potentially allowing privilege...       |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2018-7169    |
++               +------------------+----------+                        +---------------+-----------------------------------------+
+|               | CVE-2023-0634    | UNKNOWN  |                        |               | An uncontrolled process                 |
+|               |                  |          |                        |               | operation was found in the              |
+|               |                  |          |                        |               | newgrp command provided by...           |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2023-0634    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| mount         | CVE-2021-37600   | MEDIUM   | 2.33.1-0.1             |               | util-linux: integer overflow            |
+|               |                  |          |                        |               | can lead to buffer overflow             |
+|               |                  |          |                        |               | in get_sem_elements() in                |
+|               |                  |          |                        |               | sys-utils/ipcutils.c...                 |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-37600   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2022-0563    |          |                        |               | util-linux: partial disclosure          |
+|               |                  |          |                        |               | of arbitrary files in chfn              |
+|               |                  |          |                        |               | and chsh when compiled...               |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-0563    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| ncurses-base  | CVE-2021-39537   | HIGH     | 6.1+20181013-2+deb10u3 |               | ncurses: heap-based buffer overflow     |
+|               |                  |          |                        |               | in _nc_captoinfo() in captoinfo.c       |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-39537   |
++---------------+                  +          +                        +---------------+                                         +
+| ncurses-bin   |                  |          |                        |               |                                         |
+|               |                  |          |                        |               |                                         |
+|               |                  |          |                        |               |                                         |
++---------------+------------------+          +------------------------+---------------+-----------------------------------------+
+| passwd        | CVE-2019-19882   |          | 1:4.5-1.1              |               | shadow-utils: local users can           |
+|               |                  |          |                        |               | obtain root access because setuid       |
+|               |                  |          |                        |               | programs are misconfigured...           |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-19882   |
++               +------------------+----------+                        +---------------+-----------------------------------------+
+|               | CVE-2007-5686    | MEDIUM   |                        |               | initscripts in rPath Linux 1            |
+|               |                  |          |                        |               | sets insecure permissions for           |
+|               |                  |          |                        |               | the /var/log/btmp file,...              |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2007-5686    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2013-4235    |          |                        |               | shadow-utils: TOCTOU race               |
+|               |                  |          |                        |               | conditions by copying and               |
+|               |                  |          |                        |               | removing directory trees                |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2013-4235    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2018-7169    |          |                        |               | shadow-utils: newgidmap                 |
+|               |                  |          |                        |               | allows unprivileged user to             |
+|               |                  |          |                        |               | drop supplementary groups               |
+|               |                  |          |                        |               | potentially allowing privilege...       |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2018-7169    |
++               +------------------+----------+                        +---------------+-----------------------------------------+
+|               | CVE-2023-0634    | UNKNOWN  |                        |               | An uncontrolled process                 |
+|               |                  |          |                        |               | operation was found in the              |
+|               |                  |          |                        |               | newgrp command provided by...           |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2023-0634    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+| perl-base     | CVE-2011-4116    | HIGH     | 5.28.1-6+deb10u1       |               | perl: File::Temp insecure               |
+|               |                  |          |                        |               | temporary file handling                 |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2011-4116    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2020-16156   |          |                        |               | perl-CPAN: Bypass of verification       |
+|               |                  |          |                        |               | of signatures in CHECKSUMS files        |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2020-16156   |
++---------------+------------------+          +------------------------+---------------+-----------------------------------------+
+| tar           | CVE-2005-2541    |          | 1.30+dfsg-6            |               | tar: does not properly warn the user    |
+|               |                  |          |                        |               | when extracting setuid or setgid...     |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2005-2541    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2019-9923    |          |                        |               | tar: null-pointer dereference           |
+|               |                  |          |                        |               | in pax_decode_header in sparse.c        |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2019-9923    |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2022-48303   |          |                        |               | tar: a heap buffer overflow             |
+|               |                  |          |                        |               | at from_header() in list.c              |
+|               |                  |          |                        |               | via specially crafter...                |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-48303   |
++               +------------------+----------+                        +---------------+-----------------------------------------+
+|               | CVE-2021-20193   | MEDIUM   |                        |               | tar: Memory leak in                     |
+|               |                  |          |                        |               | read_header() in list.c                 |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-20193   |
++---------------+------------------+          +------------------------+---------------+-----------------------------------------+
+| util-linux    | CVE-2021-37600   |          | 2.33.1-0.1             |               | util-linux: integer overflow            |
+|               |                  |          |                        |               | can lead to buffer overflow             |
+|               |                  |          |                        |               | in get_sem_elements() in                |
+|               |                  |          |                        |               | sys-utils/ipcutils.c...                 |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2021-37600   |
++               +------------------+          +                        +---------------+-----------------------------------------+
+|               | CVE-2022-0563    |          |                        |               | util-linux: partial disclosure          |
+|               |                  |          |                        |               | of arbitrary files in chfn              |
+|               |                  |          |                        |               | and chsh when compiled...               |
+|               |                  |          |                        |               | -->avd.aquasec.com/nvd/cve-2022-0563    |
++---------------+------------------+----------+------------------------+---------------+-----------------------------------------+
+
+app/package-lock.json
+=====================
+Total: 2 (UNKNOWN: 0, LOW: 0, MEDIUM: 0, HIGH: 2, CRITICAL: 0)
+
++-----------+------------------+----------+-------------------+---------------+---------------------------------------+
+|  LIBRARY  | VULNERABILITY ID | SEVERITY | INSTALLED VERSION | FIXED VERSION |                 TITLE                 |
++-----------+------------------+----------+-------------------+---------------+---------------------------------------+
+| json5     | CVE-2022-46175   | HIGH     | 1.0.1             | 1.0.2, 2.2.2  | json5: Prototype Pollution            |
+|           |                  |          |                   |               | in JSON5 via Parse Method             |
+|           |                  |          |                   |               | -->avd.aquasec.com/nvd/cve-2022-46175 |
++-----------+------------------+          +-------------------+---------------+---------------------------------------+
+| nth-check | CVE-2021-3803    |          | 1.0.2             | 2.0.1         | nodejs-nth-check: inefficient         |
+|           |                  |          |                   |               | regular expression complexity         |
+|           |                  |          |                   |               | -->avd.aquasec.com/nvd/cve-2021-3803  |
++-----------+------------------+----------+-------------------+---------------+---------------------------------------+
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker stop zomato
+Error response from daemon: No such container: zomato
++ true
++ docker rm zomato
+Error response from daemon: No such container: zomato
++ true
++ docker run -d --name zomato -p 3000:3000 vijayreddykona/zomato:latest
+915b55388c1ee9af4db6720a7779f04fa9746d209e00cf136e1d4a3af6cb0c6a
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
